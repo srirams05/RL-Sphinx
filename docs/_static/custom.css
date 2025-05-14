@@ -1,12 +1,29 @@
-/* Base font settings for math content */
-.math {
-    font-family: "Times New Roman", Times, serif !important;
+
+/* Main content width for desktop */
+.wy-nav-content {
+    max-width: 1200px !important;
 }
 
-/* Base font settings for regular text */
-body,
-.rst-content,
-.wy-nav-content {
-    font-family: "Times New Roman", Times, serif !important;
+/* Large desktop screens */
+@media screen and (min-width: 1400px) {
+    .wy-nav-content {
+        max-width: 1400px !important;
+    }
+}
+
+/* iPad and tablets (portrait and landscape) */
+@media screen and (max-width: 1024px) {
+    .wy-nav-content {
+        max-width: 90% !important;
+        padding: 1.618em 3% !important;
+    }
+}
+
+/* Smaller tablets and large phones */
+@media screen and (max-width: 768px) {
+    .wy-nav-content {
+        max-width: 100% !important;
+        padding: 1em 2% !important;
+    }
 }
 
