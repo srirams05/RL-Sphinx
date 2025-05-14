@@ -1,0 +1,1257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explain the concept of Reinforcement Learning in a formal way. &mdash; My Test Book  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="chapter2.html" />
+    <link rel="prev" title="Welcome to My Test Book" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            My Test Book
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Explain the concept of Reinforcement Learning in a formal way.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#reward-function-r-s-a-dependence">Reward function <span class="math notranslate nohighlight">\(R(s,a)\)</span> dependence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#the-policy-pi-cdot">The policy <span class="math notranslate nohighlight">\(\pi(\cdot)\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#trajectory">Trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#transition-probability-and-policy-probability">Transition probability and Policy Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#state-value-function">State value function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#probability-tree-for-v-pi-s">Probability tree for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#bellman-equation">Bellman Equation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#bellman-equation-to-system-of-linear-equations">Bellman Equation <span class="math notranslate nohighlight">\(\to\)</span> System of Linear Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#comapring-policies">Comapring Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#return-value">Return value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#bellman-equations-for-q-pi-and-v-pi">Bellman Equations for <span class="math notranslate nohighlight">\(q_{\pi}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi}\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html#basic-math-examples">Basic Math Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html#code-snippet">Code Snippet</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">My Test Book</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Explain the concept of Reinforcement Learning in a formal way.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/chapter1.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="explain-the-concept-of-reinforcement-learning-in-a-formal-way">
+<h1>Explain the concept of Reinforcement Learning in a formal way.<a class="headerlink" href="#explain-the-concept-of-reinforcement-learning-in-a-formal-way" title="Link to this heading"></a></h1>
+<p>Below is a step-by-step formal explanation of the basic concepts in Reinforcement Learning (RL). We will frame RL in terms of a Markov Decision Process (MDP), which is the standard mathematical model used.</p>
+<ol class="arabic simple">
+<li><p>Markov Decision Process (MDP)<br />
+A Markov Decision Process is characterized by the tuple</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+(\mathcal{S},\,\mathcal{A},\,P,\,R,\,\gamma),
+\]</div>
+<p>where:<br />
+• <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is the state space. Each element <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span> represents a possible configuration of the environment.<br />
+• <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is the action space. Each element <span class="math notranslate nohighlight">\(a \in \mathcal{A}\)</span> is a possible action the agent can take.<br />
+• <span class="math notranslate nohighlight">\(P(s' \mid s,a)\)</span> is the transition probability function, which gives the probability of transitioning from state <span class="math notranslate nohighlight">\(s\)</span> to state <span class="math notranslate nohighlight">\(s'\)</span> when action <span class="math notranslate nohighlight">\(a\)</span> is taken. Formally,</p>
+<div class="math notranslate nohighlight">
+\[
+P(s' \mid s,a) \;=\;\Pr(S_{t+1} = s' \,\big\vert\, S_t = s,\, A_t = a).
+\]</div>
+<p>• <span class="math notranslate nohighlight">\(R(s,a)\)</span> is the reward function, which specifies the reward the agent receives for taking action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>. Sometimes it is also written as the expected immediate reward <span class="math notranslate nohighlight">\(R: \mathcal{S} \times \mathcal{A} \to \mathbb{R}\)</span>.<br />
+• <span class="math notranslate nohighlight">\(\gamma \in [0,1]\)</span> is the discount factor, which balances the importance of immediate rewards versus future rewards. A smaller <span class="math notranslate nohighlight">\(\gamma\)</span> emphasizes present rewards, while a value near <span class="math notranslate nohighlight">\(1\)</span> gives more weight to future rewards.</p>
+<ol class="arabic simple" start="2">
+<li><p>Agent-Environment Interaction<br />
+In Reinforcement Learning, an agent interacts with an environment (modeled as an MDP) over a sequence of discrete time steps <span class="math notranslate nohighlight">\(t = 0,1,2,\dots\)</span>. The agent observes the state <span class="math notranslate nohighlight">\(S_t\)</span>, takes an action <span class="math notranslate nohighlight">\(A_t\)</span>, receives a reward <span class="math notranslate nohighlight">\(R_{t+1}\)</span>, and the environment transitions to a new state <span class="math notranslate nohighlight">\(S_{t+1}\)</span>. The agent’s goal is to learn a strategy (policy) to choose actions that maximize cumulative reward.</p></li>
+<li><p>Policy (<span class="math notranslate nohighlight">\(\pi\)</span>)<br />
+A policy <span class="math notranslate nohighlight">\(\pi\)</span> is a mapping from states to probabilities of selecting each available action. Formally,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\pi(a \mid s) \;=\;\Pr(A_t = a \,\big\vert\,S_t = s).
+\]</div>
+<p>A (deterministic) policy can also be written as a function <span class="math notranslate nohighlight">\( \pi : \mathcal{S} \to \mathcal{A}\)</span> that picks a specific action in each state.</p>
+<ol class="arabic simple" start="4">
+<li><p>Return (Cumulative Discounted Reward)<br />
+The return <span class="math notranslate nohighlight">\(G_t\)</span> from a time step <span class="math notranslate nohighlight">\(t\)</span> is defined as the total discounted reward from time <span class="math notranslate nohighlight">\(t\)</span> onward. That is,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+G_t \;=\; R_{t+1} \;+\;\gamma\,R_{t+2} \;+\;\gamma^2\,R_{t+3} \;+\;\ldots 
+   \;=\; \sum_{k=0}^{\infty} \gamma^{\,k}\, R_{t+k+1}.
+\]</div>
+<ol class="arabic" start="5">
+<li><p>Value Functions<br />
+Value functions quantify how “good” it is to be in a certain state or to take a certain action in a given state. Two common value functions are:</p>
+<p>a) State-Value Function<br />
+The value of a state <span class="math notranslate nohighlight">\(s\)</span> under a policy <span class="math notranslate nohighlight">\(\pi\)</span>, denoted <span class="math notranslate nohighlight">\(v_\pi(s)\)</span>, is the expected return when starting in state <span class="math notranslate nohighlight">\(s\)</span> and following <span class="math notranslate nohighlight">\(\pi\)</span> thereafter. Formally,</p>
+</li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_\pi(s) \;=\; \mathbb{E}\bigl[G_t \,\big\vert\, S_t = s,\;\pi \bigr].
+\]</div>
+<p>b) Action-Value Function<br />
+The action-value function <span class="math notranslate nohighlight">\(q_\pi(s,a)\)</span> is the expected return when starting from state <span class="math notranslate nohighlight">\(s\)</span>, taking action <span class="math notranslate nohighlight">\(a\)</span>, and thereafter following policy <span class="math notranslate nohighlight">\(\pi\)</span>. Formally,</p>
+<div class="math notranslate nohighlight">
+\[
+q_\pi(s,a) \;=\; 
+   \mathbb{E}\bigl[G_t \,\big\vert\, S_t = s,\;A_t = a,\;\pi \bigr].
+\]</div>
+<ol class="arabic simple" start="6">
+<li><p>Optimal Value Functions and Optimal Policy<br />
+The goal in reinforcement learning is typically to find an optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> that maximizes the expected return from every state. We define the optimal state-value function <span class="math notranslate nohighlight">\(v_*(s)\)</span> and the optimal action-value function <span class="math notranslate nohighlight">\(q_*(s,a)\)</span> by</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_*(s) \;=\; \max_{\pi} \;v_\pi(s),
+   \quad
+   q_*(s,a) \;=\; \max_{\pi} \;q_\pi(s,a).
+\]</div>
+<p>An optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> is any policy that achieves these optimal values.</p>
+<ol class="arabic simple" start="7">
+<li><p>Bellman Optimality Equations<br />
+The optimal value functions satisfy the Bellman optimality equations:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_*(s) \;=\; \max_{a \in \mathcal{A}} \Bigl[\,R(s,a)\;+\;\gamma\sum_{s'}P(s' \mid s,a)\,v_*(s')\Bigr],
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+q_*(s,a) \;=\; R(s,a)\;+\;\gamma\sum_{s'} P(s' \mid s,a)\,\max_{a'} q_*(s',a').
+\]</div>
+<p>These equations express a recursive relationship between the value of a state (or state-action pair) and the values of subsequent states (state-action pairs).</p>
+<ol class="arabic" start="8">
+<li><p>Learning in Reinforcement Learning<br />
+The crux of Reinforcement Learning is that the agent does not have full knowledge of the MDP (i.e., it does not initially know <span class="math notranslate nohighlight">\(P\)</span> or <span class="math notranslate nohighlight">\(R\)</span>). The agent must estimate the optimal policy by interacting with the environment:<br />
+• It observes states and rewards.<br />
+• It updates estimates (e.g., of <span class="math notranslate nohighlight">\(v_*(s)\)</span> or <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>).<br />
+• It adjusts its policy to choose better actions in the future.</p>
+<p>Popular algorithms include:<br />
+• Temporal-Difference Methods (e.g., Q-Learning, SARSA).<br />
+• Monte Carlo Methods.<br />
+• Policy Gradient Methods.</p>
+</li>
+</ol>
+<p>In summary, Reinforcement Learning is about an agent learning to map states of an environment to actions in order to maximize the cumulative reward. Mathematically, RL methods are designed to solve or approximate solutions to the MDP’s optimal value functions—and thus find an optimal or near-optimal policy—when the agent must learn about the environment solely through experience.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="reward-function-r-s-a-dependence">
+<h1>Reward function <span class="math notranslate nohighlight">\(R(s,a)\)</span> dependence<a class="headerlink" href="#reward-function-r-s-a-dependence" title="Link to this heading"></a></h1>
+<p><em><strong>It seems to me that the reward function <span class="math notranslate nohighlight">\(R(s,a)\)</span> should also depend upon <span class="math notranslate nohighlight">\(s’\)</span>? For a given <span class="math notranslate nohighlight">\((s,a)\)</span>, the agent could transition to multiple <span class="math notranslate nohighlight">\(s’\)</span> and therefore it suggests that <span class="math notranslate nohighlight">\(R\)</span> should also depend on <span class="math notranslate nohighlight">\(s’\)</span>. Clarify this.</strong></em></p>
+<p><strong>Answer</strong></p>
+<p>Below is a step-by-step clarification of why, in many MDP or Reinforcement Learning formulations, one sometimes sees the reward function written as <span class="math notranslate nohighlight">\(R(s,a)\)</span> (i.e., depending only on <span class="math notranslate nohighlight">\((s,a)\)</span>) and other times as <span class="math notranslate nohighlight">\(R(s,a,s')\)</span> (i.e., also including the next state):</p>
+<ol class="arabic simple">
+<li><p>Different but Equivalent MDP Definitions</p></li>
+</ol>
+<p>In the most general Markov Decision Process (MDP) definition, the one-step reward after taking action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span> and ending up in state <span class="math notranslate nohighlight">\(s'\)</span> can indeed depend on all three:</p>
+<div class="math notranslate nohighlight">
+\[
+R(s,a,s') : \mathcal{S} \times \mathcal{A} \times \mathcal{S} \;\rightarrow\; \mathbb{R}.
+\]</div>
+<p>This is sometimes written as <span class="math notranslate nohighlight">\(R_t = R(S_t, A_t, S_{t+1})\)</span>.</p>
+<p>However, many treatments simplify notation by writing</p>
+<div class="math notranslate nohighlight">
+\[
+R(s,a) \quad\text{or}\quad R(s) \quad\text{or}\quad R(a)
+\]</div>
+<p>depending on which elements really matter for the reward in the domain under consideration.</p>
+<ol class="arabic simple" start="2">
+<li><p>Why Using R(s,a) Can Be Enough</p></li>
+</ol>
+<p>In some problems, the one-step reward is essentially fixed once you pick <span class="math notranslate nohighlight">\((s,a)\)</span>, regardless of the next state <span class="math notranslate nohighlight">\(s'\)</span>. More precisely, one might define:</p>
+<div class="math notranslate nohighlight">
+\[
+R(s,a) \;=\; \mathbb{E}\bigl[\,R_t \,\big\vert\,S_t=s,\,A_t=a\bigr],
+\]</div>
+<p>meaning that this function gives the expected immediate reward upon taking action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>. If the environment is stochastic (i.e., multiple possible <span class="math notranslate nohighlight">\(s'\)</span>), then</p>
+<div class="math notranslate nohighlight">
+\[
+R(s,a) \;=\;\sum_{s'} P(s' \mid s,a)\,\tilde{r}(s,a,s'),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{r}\)</span> is some underlying reward for transitioning to <span class="math notranslate nohighlight">\(s'\)</span>. Thus, even though the actual reward might depend on <span class="math notranslate nohighlight">\(s'\)</span>, one can bundle the expectation over <span class="math notranslate nohighlight">\(s'\)</span> into <span class="math notranslate nohighlight">\(R(s,a)\)</span>. This keeps the notation more compact while still retaining the necessary information.</p>
+<ol class="arabic simple" start="3">
+<li><p>When R(s,a,s’) is Used Explicitly</p></li>
+</ol>
+<p>If you want to specify exactly how the reward depends on the next state <span class="math notranslate nohighlight">\(s'\)</span>, or if your problem inherently requires that detail (for instance, certain transitions might yield different bonuses or penalties), you can define</p>
+<div class="math notranslate nohighlight">
+\[
+R(s,a,s').
+\]</div>
+<p>Then, for each transition <span class="math notranslate nohighlight">\((s,a)\to s'\)</span>, you would get a specific reward <span class="math notranslate nohighlight">\(R(s,a,s')\)</span> rather than an expected value. This form is more explicit but can be more cumbersome in some derivations.</p>
+<ol class="arabic simple" start="4">
+<li><p>Equivalence in Theory</p></li>
+</ol>
+<p>Mathematically, the two formulations
+(a) <span class="math notranslate nohighlight">\(R(s,a)\,=\,\mathbb{E}[R(s,a,s')\,\vert\,s,a]\)</span>
+and
+(b) <span class="math notranslate nohighlight">\(R(s,a,s')\)</span>
+are equivalent if you interpret <span class="math notranslate nohighlight">\(R(s,a)\)</span> as that conditional expectation over the randomized transition to <span class="math notranslate nohighlight">\(s'\)</span>.</p>
+<p>Therefore, one formulation or the other does not fundamentally change the problem; it just changes how explicitly you write the dependence on <span class="math notranslate nohighlight">\(s'\)</span>.</p>
+<ol class="arabic simple" start="5">
+<li><p>Example: Chess</p></li>
+</ol>
+<p>Taking chess as an example:<br />
+• One might write <span class="math notranslate nohighlight">\(R(s,a) = 0\)</span> for all intermediate moves (since no immediate reward is given until checkmate). At the end of the game, you get +1, -1, or 0.<br />
+• If you wanted an incremental reward for capturing certain pieces, you might define <span class="math notranslate nohighlight">\(R(s,a,s')\)</span> that encodes a bonus whenever a capture move transitions you to a state <span class="math notranslate nohighlight">\(s'\)</span> with fewer opponent pieces. Alternatively, you could incorporate that into an expected sense, but it becomes somewhat clearer to define it as a function of the specific transition.</p>
+<ol class="arabic simple" start="6">
+<li><p>Summary</p></li>
+</ol>
+<p>• It is correct that there can be multiple next states <span class="math notranslate nohighlight">\(s'\)</span> for a given <span class="math notranslate nohighlight">\((s,a)\)</span>.<br />
+• Hence, in the most general MDP definition, we often see <span class="math notranslate nohighlight">\(R(s,a,s')\)</span>.<br />
+• Many RL texts and simpler MDP formulations use <span class="math notranslate nohighlight">\(R(s,a)\)</span> to represent the expected immediate reward (averaging over the distribution of next states <span class="math notranslate nohighlight">\(s'\)</span>), making notation a bit simpler for analysis.</p>
+<p>In short: yes, the underlying reward can depend on <span class="math notranslate nohighlight">\(s'\)</span>. One either writes <span class="math notranslate nohighlight">\(R(s,a,s')\)</span> explicitly or uses the shorter <span class="math notranslate nohighlight">\(R(s,a)\)</span> to denote the expectation over <span class="math notranslate nohighlight">\(s'\)</span>. Both are valid formulations of the same concept.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-policy-pi-cdot">
+<h1>The policy <span class="math notranslate nohighlight">\(\pi(\cdot)\)</span><a class="headerlink" href="#the-policy-pi-cdot" title="Link to this heading"></a></h1>
+<p><em><strong>The policy <span class="math notranslate nohighlight">\(\pi(a \vert s) = \text{Pr}(A_t = a \vert S_t = s)\)</span> seems to be defined for each state <span class="math notranslate nohighlight">\(a\)</span>. Once a policy is executed at <span class="math notranslate nohighlight">\(a\)</span>, then we are in a new state, say <span class="math notranslate nohighlight">\(s’\)</span>. Is the same policy <span class="math notranslate nohighlight">\(\pi\)</span> defined for <span class="math notranslate nohighlight">\(s’\)</span> as well? In other words, is <span class="math notranslate nohighlight">\(\pi(\cdot)\)</span> defined for the entire state space?</strong></em></p>
+<p><strong>Answer</strong></p>
+<p>Below is a step-by-step explanation clarifying whether the same policy <span class="math notranslate nohighlight">\(\pi\)</span> is defined for every state in the state space:</p>
+<ol class="arabic simple">
+<li><p>What a Policy Is<br />
+• In Reinforcement Learning, a policy <span class="math notranslate nohighlight">\(\pi\)</span> is defined as a mapping from states to a probability distribution over actions. Formally:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\pi:\;\mathcal{S}\;\to\;\Delta(\mathcal{A}),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta(\mathcal{A})\)</span> is the set of all probability distributions over the action set <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>.</p>
+<p>• Equivalently, we often write <span class="math notranslate nohighlight">\(\pi(a \mid s)\)</span> to denote the probability of choosing action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p>Applying <span class="math notranslate nohighlight">\(\pi\)</span> in an MDP Scenario<br />
+• Consider the Markov Decision Process (MDP) with state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>. At any step <span class="math notranslate nohighlight">\(t\)</span>, the agent observes the current state <span class="math notranslate nohighlight">\(S_t\in \mathcal{S}\)</span>.<br />
+• The policy <span class="math notranslate nohighlight">\(\pi\)</span> is used to select an action <span class="math notranslate nohighlight">\(A_t\)</span>. Even if <span class="math notranslate nohighlight">\(\pi\)</span> is stochastic, <span class="math notranslate nohighlight">\(\pi(a \mid s)\)</span> tells us how likely each action <span class="math notranslate nohighlight">\(a\)</span> is, given <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
+<li><p>Transition to the Next State<br />
+• After executing the chosen action <span class="math notranslate nohighlight">\(A_t\)</span> in state <span class="math notranslate nohighlight">\(S_t\)</span>, the environment transitions to a new state <span class="math notranslate nohighlight">\(S_{t+1}=s'\)</span>.<br />
+• Now, at state <span class="math notranslate nohighlight">\(s'\)</span>, the same policy <span class="math notranslate nohighlight">\(\pi\)</span> applies; namely, to choose the next action <span class="math notranslate nohighlight">\(A_{t+1}\)</span>, we again use <span class="math notranslate nohighlight">\(\pi(a \mid s')\)</span>.<br />
+• Thus, one and the same <span class="math notranslate nohighlight">\(\pi\)</span> determines actions for every state the agent might encounter.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pi\)</span> Is Defined for the Entire State Space<br />
+• By definition, a (stationary) reinforcement-learning policy gives a decision rule for every possible state in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.<br />
+• That is, for each state <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>, <span class="math notranslate nohighlight">\(\pi\)</span> prescribes how the agent should act.<br />
+• So, yes—<span class="math notranslate nohighlight">\(\pi\)</span> is indeed “the same policy” for all states, in the sense that there is a single function <span class="math notranslate nohighlight">\(\pi(\cdot)\)</span> that applies throughout the state space.</p></li>
+<li><p>Illustration with Deterministic Policies<br />
+• If <span class="math notranslate nohighlight">\(\pi\)</span> is deterministic, then for every state <span class="math notranslate nohighlight">\(s\)</span>, <span class="math notranslate nohighlight">\(\pi(s)\)</span> is exactly one action (rather than a distribution).<br />
+• In either case—deterministic or stochastic—<span class="math notranslate nohighlight">\(\pi\)</span> unequivocally answers: “What do we do if we end up in state <span class="math notranslate nohighlight">\(s\)</span>?”</p></li>
+<li><p>Policy Improvement or Changes Over Time<br />
+• In some learning algorithms, the policy <span class="math notranslate nohighlight">\(\pi\)</span> may be updated as the agent gains experience (for instance, by gradient steps or by policy iteration).<br />
+• However, at any particular time during training (or after training), the agent’s “current” policy is still a single function defined over all states.</p></li>
+<li><p>Conclusion<br />
+• Yes, once the agent transitions to the new state <span class="math notranslate nohighlight">\(s'\)</span>, the same policy <span class="math notranslate nohighlight">\(\pi\)</span> is again used to pick the next action.<br />
+• Formally, a policy is defined over the entire state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, ensuring that no matter which state is encountered, the agent knows how it should proceed.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="trajectory">
+<h1>Trajectory<a class="headerlink" href="#trajectory" title="Link to this heading"></a></h1>
+<p><em><strong>Suppose, the agent is at state <span class="math notranslate nohighlight">\(s_t\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> under a policy <span class="math notranslate nohighlight">\(\pi\)</span>. Per this policy the action <span class="math notranslate nohighlight">\(a_t\)</span> is applied and the agent moves to state <span class="math notranslate nohighlight">\(s_{t+1}\)</span> getting the reward <span class="math notranslate nohighlight">\(R_{t+1}\)</span>. In this way, the agent traces out a trajectory in state space from which the Return <span class="math notranslate nohighlight">\(G_t\)</span> for this trajectory can be calculated. Is my understanding correct?</strong></em></p>
+<p><strong>Answer</strong></p>
+<p>Below is a step-by-step confirmation and elaboration on your understanding, with all mathematical symbols in LaTeX:</p>
+<ol class="arabic simple">
+<li><p>Agent in State <span class="math notranslate nohighlight">\(\boldsymbol{s_t}\)</span> at Time <span class="math notranslate nohighlight">\(\boldsymbol{t}\)</span><br />
+At any discrete time step <span class="math notranslate nohighlight">\(t\)</span>, the agent observes the current state <span class="math notranslate nohighlight">\(s_t\)</span>.</p></li>
+<li><p>Action <span class="math notranslate nohighlight">\(\boldsymbol{a_t}\)</span> per Policy <span class="math notranslate nohighlight">\(\boldsymbol{\pi}\)</span><br />
+According to the agent’s policy <span class="math notranslate nohighlight">\(\pi\)</span>, the agent selects and executes an action <span class="math notranslate nohighlight">\(a_t\)</span>.<br />
+• If <span class="math notranslate nohighlight">\(\pi\)</span> is stochastic, then</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+a_t \sim \pi(\cdot \,\vert\, s_t),
+\]</div>
+<p>meaning <span class="math notranslate nohighlight">\(a_t\)</span> is sampled from the probability distribution <span class="math notranslate nohighlight">\(\pi(a\,\vert\,s_t)\)</span>.<br />
+• If <span class="math notranslate nohighlight">\(\pi\)</span> is deterministic, then</p>
+<div class="math notranslate nohighlight">
+\[
+a_t \;=\;\pi(s_t).
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Transition and Reward<br />
+After the agent executes action <span class="math notranslate nohighlight">\(a_t\)</span> in state <span class="math notranslate nohighlight">\(s_t\)</span>, the environment transitions to a new state <span class="math notranslate nohighlight">\(s_{t+1}\)</span> and provides a (possibly stochastic) reward <span class="math notranslate nohighlight">\(R_{t+1}\)</span>. Formally,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+s_{t+1} \;\sim\; P(\,\cdot \,\vert\, s_t,\, a_t),
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+R_{t+1} \;=\; R\bigl(s_t,\,a_t,\,s_{t+1}\bigr)
+   \quad
+   (\text{or an expected form }R(s,a)\text{, depending on the formulation}).
+\]</div>
+<ol class="arabic simple" start="4">
+<li><p>Trajectory (Episode)<br />
+By repeating this process over time, one obtains a trajectory (or sequence) of states, actions, and rewards:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\bigl(s_0,\,a_0,\,R_1,\,s_1,\,a_1,\,R_2,\,s_2,\,a_2,\,R_3,\dots\bigr).
+\]</div>
+<p>Such a sequence typically continues until a terminal condition (end of episode) is reached or indefinitely in an ongoing task.</p>
+<ol class="arabic simple" start="5">
+<li><p>Return <span class="math notranslate nohighlight">\(\boldsymbol{G_t}\)</span><br />
+The return <span class="math notranslate nohighlight">\(G_t\)</span> from time <span class="math notranslate nohighlight">\(t\)</span> is the total discounted reward obtained by following policy <span class="math notranslate nohighlight">\(\pi\)</span> from time <span class="math notranslate nohighlight">\(t\)</span> onward:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+G_t \;=\; R_{t+1} \;+\;\gamma\,R_{t+2} \;+\;\gamma^2\,R_{t+3} \;+\;\dots 
+   \;=\; \sum_{k=0}^{\infty} \gamma^k R_{t+k+1},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(0 \,\le\, \gamma \,\le\, 1\)</span> is the discount factor that balances immediate and future rewards.</p>
+<ol class="arabic simple" start="6">
+<li><p>Conclusion<br />
+Hence, your understanding is correct: by following the policy <span class="math notranslate nohighlight">\(\pi\)</span>, the agent traces out a trajectory <span class="math notranslate nohighlight">\( (s_t, a_t, R_{t+1}, s_{t+1}, \dots) \)</span> in the state space. From this trajectory, one can calculate the return <span class="math notranslate nohighlight">\(G_t\)</span>. This process—collecting states, actions, and rewards—is at the heart of Reinforcement Learning, where the agent’s goal is to maximize the expected return.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="transition-probability-and-policy-probability">
+<h1>Transition probability and Policy Probability<a class="headerlink" href="#transition-probability-and-policy-probability" title="Link to this heading"></a></h1>
+<p>In the MDP formulation, we can regard <span class="math notranslate nohighlight">\(S_t \in \mathcal{S}\)</span> as a random variable. Similarly, <span class="math notranslate nohighlight">\(A_t \in \mathcal{A}\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>. We have 2 probabilistic definitions:</p>
+<ol class="arabic simple">
+<li><p>State Transition:  <span class="math notranslate nohighlight">\(\text{Pr}(S_{t+1} = s ^{\prime} \vert S_t = s, A_t = a)\)</span>. This gives the probability of a particular value of the state <span class="math notranslate nohighlight">\(s^{\prime}\)</span> at time <span class="math notranslate nohighlight">\(t+1\)</span> given specific values of the state and action at time <span class="math notranslate nohighlight">\(t\)</span>. Therefore we have:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\sum_{s^{\prime} \in \mathcal{S}} \text{Pr}(S_{t+1} = s ^{\prime} \vert S_t = s, A_t = a) = 1
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Policy function: <span class="math notranslate nohighlight">\(\pi(a \vert s) = \text{Pr}(A_t = a \vert S_t = s)\)</span>. Therefore we have:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\sum_{a \in \mathcal{A}}  \text{Pr}(A_t = a \vert S_t = s) =1
+\]</div>
+<p>Is this correct?</p>
+<p>Below is a step-by-step confirmation and explanation:</p>
+<ol class="arabic simple">
+<li><p>State Transition Probability<br />
+• In a Markov Decision Process (MDP), the transition function</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\Pr\bigl(S_{t+1} = s' \,\big\vert\, S_t = s,\;A_t = a\bigr)
+\]</div>
+<p>is a probability distribution over the next state <span class="math notranslate nohighlight">\(s'\)</span> given the current state <span class="math notranslate nohighlight">\(s\)</span> and action <span class="math notranslate nohighlight">\(a\)</span>.<br />
+• Because it is a probability distribution over <span class="math notranslate nohighlight">\(s'\in\mathcal{S}\)</span>, it must sum to 1:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{s' \in \mathcal{S}} \Pr\bigl(S_{t+1} = s' \,\big\vert\, S_t = s,\;A_t = a\bigr) \;=\; 1.
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Policy Function<br />
+• A policy <span class="math notranslate nohighlight">\(\pi\)</span> for a stationary MDP is given by</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\pi(a \mid s) \;=\; \Pr\bigl(A_t = a \,\big\vert\, S_t = s\bigr).
+\]</div>
+<p>• This is a probability distribution over actions <span class="math notranslate nohighlight">\(a\in\mathcal{A}\)</span>, for each given state <span class="math notranslate nohighlight">\(s\)</span>. Hence, for each <span class="math notranslate nohighlight">\(s\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{a \,\in\,\mathcal{A}} \pi(a \mid s) \;=\; 1.
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Conclusion<br />
+Yes, both conditions you stated are correct:<br />
+• The transition probabilities over all possible next states sum to 1.<br />
+• The policy probabilities over all possible actions in a given state also sum to 1.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="state-value-function">
+<h1>State value function<a class="headerlink" href="#state-value-function" title="Link to this heading"></a></h1>
+<p>We have shown before that for a trajectory that starts at state <span class="math notranslate nohighlight">\(s_t\)</span> under the policy <span class="math notranslate nohighlight">\(\pi\)</span>,  the return <span class="math notranslate nohighlight">\(G_t\)</span> from time <span class="math notranslate nohighlight">\(t\)</span> is the total discounted reward obtained by following policy <span class="math notranslate nohighlight">\(\pi\)</span> from time <span class="math notranslate nohighlight">\(t\)</span> onward:</p>
+<div class="math notranslate nohighlight">
+\[
+G_t \;=\; R_{t+1} \;+\;\gamma\,R_{t+2} \;+\;\gamma^2\,R_{t+3} \;+\;\dots 
+   \;=\; \sum_{k=0}^{\infty} \gamma^k R_{t+k+1},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(0 \,\le\, \gamma \,\le\, 1\)</span> is the discount factor. Since <span class="math notranslate nohighlight">\(S_t, A_t\)</span> are random variables, so is <span class="math notranslate nohighlight">\(R_t\)</span> and therefore <span class="math notranslate nohighlight">\(G_t\)</span>. Another way to say it that there are many trajectories that emanate from<span class="math notranslate nohighlight">\(s_t\)</span> under <span class="math notranslate nohighlight">\(\pi\)</span> and we can define an expected value of <span class="math notranslate nohighlight">\(G_t\)</span> to be the state value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> where <span class="math notranslate nohighlight">\(S_t = s\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi} = \mathbb{E} (G_t \vert S_t =s )
+\]</div>
+<p>Does this definition of the state value make sense and if so, the expected value implies a conditional probability distribution. How is this known?</p>
+<p><strong>Answer</strong> Below is a step-by-step explanation:</p>
+<ol class="arabic simple">
+<li><p>The Definition of the State-Value Function<br />
+The state-value function under a policy <span class="math notranslate nohighlight">\(\pi\)</span>, denoted <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>, is defined as</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s) \;=\; \mathbb{E}\bigl[G_t \,\big\vert\, S_t = s \bigr],
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+G_t \;=\;\sum_{k=0}^{\infty} \gamma^k\,R_{t+k+1}.
+\]</div>
+<p>In words, <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is the expected return (sum of discounted future rewards) when starting from state <span class="math notranslate nohighlight">\(s\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and subsequently following policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p>Why Is <span class="math notranslate nohighlight">\(G_t\)</span> Random?<br />
+• The trajectory that unfolds from time <span class="math notranslate nohighlight">\(t\)</span> onward depends on:<br />
+– The stochastic policy <span class="math notranslate nohighlight">\(\pi(a \mid s)\)</span>, which determines how likely each action <span class="math notranslate nohighlight">\(a\)</span> is in state <span class="math notranslate nohighlight">\(s\)</span>.<br />
+– The transition probabilities <span class="math notranslate nohighlight">\(P(s' \mid s,a)\)</span>, which govern how you move to the next state <span class="math notranslate nohighlight">\(s'\)</span>.<br />
+– The potentially stochastic reward <span class="math notranslate nohighlight">\(R_{t+1}\)</span> itself.<br />
+• Therefore, for a fixed <span class="math notranslate nohighlight">\(s\)</span>, there are many possible future trajectories (sequences of states, actions, and rewards). Each trajectory has a different realization of <span class="math notranslate nohighlight">\(G_t\)</span>. Hence <span class="math notranslate nohighlight">\(G_t\)</span> is a random variable.</p></li>
+<li><p>Taking the Expectation (Conditional Probability Distribution)<br />
+Because there are multiple possible ways the future might evolve from <span class="math notranslate nohighlight">\(s\)</span>, the definition</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}\bigl[G_t \,\big\vert\, S_t = s\bigr]
+\]</div>
+<p>reflects an expectation over all those possible trajectories. Formally, this expectation is taken with respect to the conditional probability distribution of all future states, actions, and rewards given that <span class="math notranslate nohighlight">\(S_t = s\)</span> and that the agent follows policy <span class="math notranslate nohighlight">\(\pi\)</span>. Symbolically, we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}\bigl[G_t \,\big\vert\, S_t = s\bigr]
+\;=\;
+\sum_{\text{all possible future trajectories}}
+\Pr\bigl(\text{trajectory}\,\big\vert\,S_t=s,\;\pi\bigr)
+\;\times\;
+G_t(\text{trajectory}),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Pr(\text{trajectory}\,\vert\,S_t=s,\;\pi)\)</span> is constructed from the chain of probabilities defined by <span class="math notranslate nohighlight">\(\pi(a\mid s)\)</span> and <span class="math notranslate nohighlight">\(P(s'\mid s,a)\)</span>.</p>
+<ol class="arabic simple" start="4">
+<li><p>Where the Conditional Distribution Comes From<br />
+• The agent’s policy <span class="math notranslate nohighlight">\(\pi(a\mid s)\)</span> gives a distribution over actions <span class="math notranslate nohighlight">\(a\)</span> for every state <span class="math notranslate nohighlight">\(s\)</span>.<br />
+• The environment’s transition function <span class="math notranslate nohighlight">\(P(s'\mid s,a)\)</span> gives a distribution over next states <span class="math notranslate nohighlight">\(s'\)</span> for each pair <span class="math notranslate nohighlight">\((s,a)\)</span>.<br />
+• Combining these, one obtains the probability tree of all future trajectories (including rewards).<br />
+• In RL notation, we simply write <span class="math notranslate nohighlight">\(\mathbb{E}[\,G_t\mid S_t=s]\)</span> as a shorthand. Under the hood, it involves the full conditional distribution derived from <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
+<li><p>Conclusion<br />
+Yes, this definition of the state-value function</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s) \;=\; \mathbb{E}\bigl[G_t \,\big\vert\, S_t=s\bigr]
+\]</div>
+<p>makes sense: we take an expectation of the random return <span class="math notranslate nohighlight">\(G_t\)</span> over all possible ways the future can evolve from state <span class="math notranslate nohighlight">\(s\)</span>, given that the agent acts according to <span class="math notranslate nohighlight">\(\pi\)</span>. That expectation is indeed a conditional probability distribution (conditioned on <span class="math notranslate nohighlight">\(S_t = s\)</span>), implicitly governed by <span class="math notranslate nohighlight">\(\pi\)</span> and the transition probabilities of the MDP.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="probability-tree-for-v-pi-s">
+<h1>Probability tree for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span><a class="headerlink" href="#probability-tree-for-v-pi-s" title="Link to this heading"></a></h1>
+<p>Symbolically, <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}\bigl[G_t \,\big\vert\, S_t = s\bigr]
+\;=\;
+\sum_{\text{all possible future trajectories}}
+\Pr\bigl(\text{trajectory}\,\big\vert\,S_t=s,\;\pi\bigr)
+\;\times\;
+G_t(\text{trajectory}),
+\]</div>
+<p>to illustrate how this conditional probability distribution is derived from <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(P\)</span>, use the time instants <span class="math notranslate nohighlight">\(t, t+1, t+2\)</span> and work out the probability tree.</p>
+<p><strong>Answer</strong> Below is a step-by-step illustration of how the probability of a particular future trajectory from time <span class="math notranslate nohighlight">\(t\)</span> through <span class="math notranslate nohighlight">\(t+2\)</span> (and onward) is derived from the policy <span class="math notranslate nohighlight">\(\pi\)</span> and the transition probabilities <span class="math notranslate nohighlight">\(P\)</span>. We will explicitly write out the probability of the first couple of steps in the “probability tree” before it continues further.</p>
+<hr class="docutils" />
+<ol class="arabic simple">
+<li><p>Starting at Time t, State s</p></li>
+</ol>
+<hr class="docutils" />
+<p>We begin with:</p>
+<div class="math notranslate nohighlight">
+\[
+S_t = s.
+\]</div>
+<p>Because we are conditioning on <span class="math notranslate nohighlight">\(S_t = s\)</span>, the probability of being at <span class="math notranslate nohighlight">\(s\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> is defined to be <span class="math notranslate nohighlight">\(1\)</span> in that conditional scenario.</p>
+<hr class="docutils" />
+<ol class="arabic simple" start="2">
+<li><p>Choosing Action Aₜ</p></li>
+</ol>
+<hr class="docutils" />
+<p>Under policy <span class="math notranslate nohighlight">\(\pi\)</span>, the agent chooses action <span class="math notranslate nohighlight">\(A_t = a \in \mathcal{A}\)</span> with probability</p>
+<div class="math notranslate nohighlight">
+\[
+\pi(a \,\vert\, s).
+\]</div>
+<p>Hence,</p>
+<p>• Probability of picking action <span class="math notranslate nohighlight">\(a\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\bigl(A_t = a \,\big\vert\, S_t = s,\;\pi\bigr)
+\;=\;
+\pi(a \,\vert\, s).
+\]</div>
+<hr class="docutils" />
+<ol class="arabic simple" start="3">
+<li><p>Transition to Time t+1</p></li>
+</ol>
+<hr class="docutils" />
+<p>After choosing <span class="math notranslate nohighlight">\(A_t = a\)</span>, the environment transitions to a new state <span class="math notranslate nohighlight">\(S_{t+1} = s' \in \mathcal{S}\)</span> with probability</p>
+<div class="math notranslate nohighlight">
+\[
+P(s' \,\vert\, s,\, a).
+\]</div>
+<p>Combined with the previous step, the joint probability of picking action <span class="math notranslate nohighlight">\(a\)</span> and ending up in state <span class="math notranslate nohighlight">\(s'\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\bigl(A_t = a,\,S_{t+1} = s' \,\big\vert\, S_t = s,\,\pi\bigr)
+\;=\;
+\pi(a \,\vert\, s)\;\times\;P(s' \,\vert\, s,\,a).
+\]</div>
+<hr class="docutils" />
+<ol class="arabic simple" start="4">
+<li><p>Choosing Action A₍t+1₎ in State s’</p></li>
+</ol>
+<hr class="docutils" />
+<p>Once in state <span class="math notranslate nohighlight">\(s'\)</span> at time <span class="math notranslate nohighlight">\(t+1\)</span>, the agent chooses action <span class="math notranslate nohighlight">\(A_{t+1} = a'\)</span> with probability</p>
+<div class="math notranslate nohighlight">
+\[
+\pi(a' \,\vert\, s').
+\]</div>
+<p>Hence,</p>
+<p>• Probability of picking action <span class="math notranslate nohighlight">\(a'\)</span> in state <span class="math notranslate nohighlight">\(s'\)</span> at time <span class="math notranslate nohighlight">\(t+1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\bigl(A_{t+1} = a' \,\big\vert\, S_{t+1} = s',\,\pi\bigr)
+\;=\;
+\pi(a' \,\vert\, s').
+\]</div>
+<hr class="docutils" />
+<ol class="arabic simple" start="5">
+<li><p>Transition to Time t+2</p></li>
+</ol>
+<hr class="docutils" />
+<p>After action <span class="math notranslate nohighlight">\(A_{t+1} = a'\)</span>, the environment transitions to <span class="math notranslate nohighlight">\(S_{t+2} = s''\)</span> with probability</p>
+<div class="math notranslate nohighlight">
+\[
+P(s'' \,\vert\, s',\, a').
+\]</div>
+<p>Putting it together up to time <span class="math notranslate nohighlight">\(t+2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\Bigl(A_t = a,\;S_{t+1} = s',\;A_{t+1} = a',\;S_{t+2} = s'' \,\Big\vert\, S_t = s,\;\pi\Bigr)
+\;=\;
+\pi(a \,\vert\, s)
+\;\times\;
+P\bigl(s' \,\vert\, s,\,a\bigr)
+\;\times\;
+\pi(a' \,\vert\, s')
+\;\times\;
+P\bigl(s'' \,\vert\, s',\,a'\bigr).
+\]</div>
+<hr class="docutils" />
+<ol class="arabic simple" start="6">
+<li><p>Extending Beyond t+2</p></li>
+</ol>
+<hr class="docutils" />
+<p>By continuing this process for <span class="math notranslate nohighlight">\(t+3, t+4, \dots\)</span>, one builds the full probability tree of subsequent states and actions:</p>
+<p>• At each step, the agent’s policy <span class="math notranslate nohighlight">\(\pi(\cdot \,\vert\, s_j)\)</span> supplies the probabilities of each possible action given the current state <span class="math notranslate nohighlight">\(s_j\)</span>.<br />
+• The environment’s transition dynamics <span class="math notranslate nohighlight">\(P(s_{j+1} \,\vert\, s_j,\, a_j)\)</span> supply the probabilities of next states.</p>
+<p>Therefore, any full future trajectory (from time <span class="math notranslate nohighlight">\(t\)</span> to the end of the episode or indefinitely in an ongoing task) has a probability obtained by multiplying together all these policy and transition probabilities.</p>
+<hr class="docutils" />
+<ol class="arabic simple" start="7">
+<li><p>Putting It All Into the Expectation for v₍π₎(s)</p></li>
+</ol>
+<hr class="docutils" />
+<p>When we write</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+v_{\pi}(s)
+\;=\;
+\mathbb{E}\bigl[\,G_t \;\big\vert\; S_t = s\bigr]
+\;=\;
+\sum_{\substack{\text{all possible future} \\ \text{trajectories}}}
+\Pr\bigl(\text{trajectory}\,\big\vert\,S_t = s,\;\pi\bigr)\,\times\,G_t(\text{trajectory}),
+\end{split}\]</div>
+<p>we are summing (or integrating) over all possible sequences of the form</p>
+<div class="math notranslate nohighlight">
+\[
+\bigl(A_t,\,S_{t+1},\,A_{t+1},\,S_{t+2},\,A_{t+2},\,S_{t+3},\dots\bigr)
+\]</div>
+<p>and multiplying each trajectory’s return <span class="math notranslate nohighlight">\(G_t(\text{trajectory})\)</span> by the probability of that trajectory, which is computed via the products of <span class="math notranslate nohighlight">\(\pi(\cdot)\)</span> and <span class="math notranslate nohighlight">\(P(\cdot)\)</span> factors illustrated above.</p>
+<hr class="docutils" />
+<ol class="arabic simple" start="8">
+<li><p>Conclusion</p></li>
+</ol>
+<hr class="docutils" />
+<p>This small probability tree up to <span class="math notranslate nohighlight">\(t+2\)</span> demonstrates how each branch’s probability is the product of:</p>
+<ol class="arabic simple">
+<li><p>policy probabilities <span class="math notranslate nohighlight">\(\pi(a \,\vert\, s)\)</span>, and</p></li>
+<li><p>transition probabilities <span class="math notranslate nohighlight">\(P(s' \,\vert\, s,a)\)</span>.</p></li>
+</ol>
+<p>Continuing the same pattern through subsequent time steps yields the full conditional probability distribution of all possible future trajectories, thereby defining<br />
+<span class="math notranslate nohighlight">\(\Pr(\text{trajectory}\,\vert\,S_t=s,\pi)\)</span>.</p>
+<p>Thus, the expectation in<br />
+<span class="math notranslate nohighlight">\(\mathbb{E}[\,G_t \,\vert\,S_t=s]\)</span><br />
+is taken over this entire (potentially infinite) probability tree.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bellman-equation">
+<h1>Bellman Equation<a class="headerlink" href="#bellman-equation" title="Link to this heading"></a></h1>
+<p>Given a policy <span class="math notranslate nohighlight">\(\pi\)</span>, what is the Bellman equation and how is it used to calculate <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> for all <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>?
+How is it derived?</p>
+<p><strong>Answer</strong> Below is a step-by-step explanation of the Bellman equation for a given policy <span class="math notranslate nohighlight">\(\pi\)</span>, how it is derived, and how it is used to calculate the value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> for all states <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────</p>
+<ol class="arabic simple">
+<li><p>Definition of the State-Value Function
+────────────────────────────────────────────────────────────────────────────</p></li>
+</ol>
+<p>Recall that under a policy <span class="math notranslate nohighlight">\(\pi\)</span>, the state-value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s) 
+\;=\;
+\mathbb{E}\bigl[G_t \;\big\vert\; S_t = s\bigr]
+\;=\;
+\mathbb{E}\Bigl[\,
+\sum_{k=0}^{\infty}
+\gamma^k\,R_{t+k+1}
+\;\Big\vert\;
+S_t = s
+\Bigr].
+\]</div>
+<p>Here:
+• <span class="math notranslate nohighlight">\(G_t\)</span> is the (random) return from time <span class="math notranslate nohighlight">\(t\)</span> onward.<br />
+• <span class="math notranslate nohighlight">\(R_{t+k+1}\)</span> is the reward at time <span class="math notranslate nohighlight">\(t+k+1\)</span>.<br />
+• <span class="math notranslate nohighlight">\(\gamma \in [0,\,1]\)</span> is the discount factor.<br />
+• The expectation <span class="math notranslate nohighlight">\(\mathbb{E}[\cdot]\)</span> is taken over all possible future trajectories following policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+2) One-Step Lookahead
+────────────────────────────────────────────────────────────────────────────</p>
+<p>Consider the very next step from state <span class="math notranslate nohighlight">\(s\)</span> under policy <span class="math notranslate nohighlight">\(\pi\)</span>. The agent will choose an action <span class="math notranslate nohighlight">\(A_t = a\)</span> with probability <span class="math notranslate nohighlight">\(\pi(a \,\vert\, s)\)</span>. The environment will then transition to a next state <span class="math notranslate nohighlight">\(S_{t+1} = s'\)</span> with probability <span class="math notranslate nohighlight">\(P(s' \,\vert\, s,\,a)\)</span>, and the agent will receive a reward <span class="math notranslate nohighlight">\(R_{t+1} = R(s,a,s')\)</span> (or its expected form <span class="math notranslate nohighlight">\(R(s,a)\)</span> depending on the problem).</p>
+<p>After that step, the agent continues from state <span class="math notranslate nohighlight">\(s'\)</span>, and the expected value of the return from <span class="math notranslate nohighlight">\(s'\)</span> onward is <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span>.</p>
+<p>Thus the return <span class="math notranslate nohighlight">\(G_t\)</span>, when starting in state <span class="math notranslate nohighlight">\(s\)</span> and taking action <span class="math notranslate nohighlight">\(a\)</span> that leads to state <span class="math notranslate nohighlight">\(s'\)</span>, can be decomposed as:</p>
+<div class="math notranslate nohighlight">
+\[
+G_t
+\;=\;
+R_{t+1} 
+\;+\;
+\gamma\,G_{t+1}.
+\]</div>
+<p>But the expected value of <span class="math notranslate nohighlight">\(G_{t+1}\)</span>, given <span class="math notranslate nohighlight">\(S_{t+1} = s'\)</span> and following <span class="math notranslate nohighlight">\(\pi\)</span> thereafter, is <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+3) The Bellman Equation for v₍π₎(s)
+────────────────────────────────────────────────────────────────────────────</p>
+<p>Putting it all together, we take the expectation with respect to actions (as given by <span class="math notranslate nohighlight">\(\pi\)</span>) and next states (as given by <span class="math notranslate nohighlight">\(P\)</span>). We get the Bellman expectation equation:</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+\;=\;
+\sum_{a \in \mathcal{A}}
+\pi(a \,\vert\, s)
+\sum_{s' \in \mathcal{S}}
+P(s' \,\vert\, s,\, a)
+\bigl[
+R(s,a,s')
+\;+\;
+\gamma\,v_{\pi}(s')
+\bigr].
+\]</div>
+<p>Sometimes you will see it written in a shorter form (if the immediate reward does not explicitly depend on <span class="math notranslate nohighlight">\(s'\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+\;=\;
+\sum_{a \,\in\, \mathcal{A}}
+\pi(a \,\vert\, s)
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \,\vert\, s,a)
+\bigl[
+R(s,a)
+\;+\;
+\gamma\,v_{\pi}(s')
+\bigr].
+\]</div>
+<p>This Bellman equation says:</p>
+<ol class="arabic simple">
+<li><p>From state <span class="math notranslate nohighlight">\(s\)</span>, choose an action <span class="math notranslate nohighlight">\(a\)</span> according to <span class="math notranslate nohighlight">\(\pi\)</span>.</p></li>
+<li><p>Possibly transition to state <span class="math notranslate nohighlight">\(s'\)</span> with probability <span class="math notranslate nohighlight">\(P(s'\mid s,a)\)</span>.</p></li>
+<li><p>Accumulate the immediate reward <span class="math notranslate nohighlight">\(R(s,a,s')\)</span>.</p></li>
+<li><p>Then continue and accumulate discounted future rewards, whose expected value is <span class="math notranslate nohighlight">\(\gamma\,v_{\pi}(s')\)</span>.</p></li>
+</ol>
+<p>────────────────────────────────────────────────────────────────────────────
+4) Using the Bellman Equation to Compute v₍π₎(s)
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• The set of equations</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+  \;=\;
+  \sum_{a} \pi(a \,\vert\, s)
+  \sum_{s'} P(s' \,\vert\, s,a)\,\bigl[R(s,a,s') + \gamma\,v_{\pi}(s')\bigr]
+  \quad
+  \text{for all } s\in\mathcal{S}
+\]</div>
+<p>can be viewed as a linear system (when <span class="math notranslate nohighlight">\(\gamma &lt; 1\)</span>) if <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is finite.<br />
+• In principle, one can solve these equations exactly for <span class="math notranslate nohighlight">\(v_{\pi}\)</span> by standard linear algebra if the state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> is not too large.</p>
+<p>More commonly, in large or unknown environments, we use iterative methods—such as iterative policy evaluation—to approximate or converge to the true <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Initialize <span class="math notranslate nohighlight">\(v^{(0)}(s)\)</span> arbitrarily (e.g., zeros).</p></li>
+<li><p>For each iteration <span class="math notranslate nohighlight">\(n=0,1,2,\dots\)</span>, update</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v^{(n+1)}(s)
+   \;\leftarrow\;
+   \sum_{a} \pi(a \,\vert\, s)
+   \sum_{s'} 
+   P(s' \,\vert\, s,a)\,
+   \bigl[R(s,a,s') + \gamma\,v^{(n)}(s')\bigr].
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Repeat until convergence.</p></li>
+</ol>
+<p>────────────────────────────────────────────────────────────────────────────
+5) Why It Is Called a “Consistency” Equation
+────────────────────────────────────────────────────────────────────────────</p>
+<p>The Bellman equation essentially enforces consistency: the value of a state <span class="math notranslate nohighlight">\(s\)</span> must match the expected immediate reward plus the discounted value of the successor state under the given policy. It is a self-consistent recursive definition of <span class="math notranslate nohighlight">\(v_{\pi}\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+6) Derivation Summary
+────────────────────────────────────────────────────────────────────────────</p>
+<p>In summary, the Bellman equation is derived by:</p>
+<ol class="arabic simple">
+<li><p>Defining <span class="math notranslate nohighlight">\(v_{\pi}(s) = \mathbb{E}[G_t \mid S_t=s]\)</span>.</p></li>
+<li><p>Decomposing the return <span class="math notranslate nohighlight">\(G_t\)</span> into immediate reward plus discounted future return, <span class="math notranslate nohighlight">\(R_{t+1} + \gamma\,G_{t+1}\)</span>.</p></li>
+<li><p>Taking expectations over the random action-choice and state-transition processes dictated by <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
+</ol>
+<p>Hence, we arrive at the Bellman expectation equation, which provides a system of equations for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+7) Conclusion
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• The Bellman equation for a policy <span class="math notranslate nohighlight">\(\pi\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+\;=\;
+\sum_{a \,\in\, \mathcal{A}}
+\pi(a \,\vert\, s)
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \,\vert\, s,\,a)\,
+\bigl[
+R(s,a,s')
+\;+\;
+\gamma\,v_{\pi}(s')
+\bigr].
+\]</div>
+<p>• It is used to calculate <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> for all <span class="math notranslate nohighlight">\(s\)</span> either by directly solving this system (in the finite state case) or by applying iterative policy evaluation methods.</p>
+<p>This completes the derivation and usage of the Bellman equation in the context of evaluating a given policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bellman-equation-to-system-of-linear-equations">
+<h1>Bellman Equation <span class="math notranslate nohighlight">\(\to\)</span> System of Linear Equations<a class="headerlink" href="#bellman-equation-to-system-of-linear-equations" title="Link to this heading"></a></h1>
+<p>It seems that for the finite state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, the Bellman equation results in a system of linear equations in terms of the “variables” <span class="math notranslate nohighlight">\(v_{\pi}(s_t)\)</span>. Is this correct?</p>
+<p><strong>Answer</strong></p>
+<p>Below is a step-by-step explanation showing that for a finite state space <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>, the Bellman equation corresponds to a system of linear equations in the unknowns <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>:</p>
+<ol class="arabic simple">
+<li><p>The Bellman Equation for a Fixed Policy<br />
+Recall the Bellman expectation equation for a policy <span class="math notranslate nohighlight">\(\pi\)</span> and a finite MDP:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+   \;=\;
+   \sum_{a \,\in\, \mathcal{A}}
+   \pi(a \,\vert\, s)
+   \sum_{s' \,\in\, \mathcal{S}}
+   P(s' \,\vert\, s,\,a)
+   \,\Bigl[
+     R(s,a,s') \;+\; \gamma\,v_{\pi}(s')
+   \Bigr].
+\]</div>
+<p>Here,<br />
+•  <span class="math notranslate nohighlight">\(\mathcal{S} = \{s_1, s_2, \dots, s_{|\mathcal{S}|}\}\)</span> is a finite set of states.<br />
+•  <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> is the finite set of possible actions.<br />
+•  <span class="math notranslate nohighlight">\(\pi(a\mid s)\)</span> is the probability of action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>.<br />
+•  <span class="math notranslate nohighlight">\(P(s' \mid s,a)\)</span> is the probability of transitioning to <span class="math notranslate nohighlight">\(s'\)</span> from <span class="math notranslate nohighlight">\(s\)</span> after action <span class="math notranslate nohighlight">\(a\)</span>.<br />
+•  <span class="math notranslate nohighlight">\(R(s,a,s')\)</span> is the immediate reward.</p>
+<ol class="arabic simple" start="2">
+<li><p>Expressing the Equation for Each State<br />
+For each <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>, we can write a separate instance of the Bellman equation. Concretely, labeling the states <span class="math notranslate nohighlight">\(s_1, s_2, \dots, s_{|\mathcal{S}|}\)</span>, we get <span class="math notranslate nohighlight">\(|\mathcal{S}|\)</span> equations of the form:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s_i)
+   \;=\;
+   \sum_{a \,\in\, \mathcal{A}}
+   \pi(a \,\vert\, s_i)
+   \sum_{s_j \,\in\, \mathcal{S}}
+   P(s_j \,\vert\, s_i,\,a)\,
+   \Bigl[
+     R(s_i,a,s_j) \;+\; \gamma\,v_{\pi}(s_j)
+   \Bigr]
+   \quad\text{for}\quad i=1,2,\dots,|\mathcal{S}|.
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Rearranging into Linear System Form<br />
+Notice that <span class="math notranslate nohighlight">\(v_{\pi}(s_i)\)</span> appears on the left-hand side, and <span class="math notranslate nohighlight">\(v_{\pi}(s_j)\)</span> (with potentially different <span class="math notranslate nohighlight">\(j\)</span>) appears inside the sum on the right-hand side. What we have is a set of linear equations in the unknowns <span class="math notranslate nohighlight">\(v_{\pi}(s_1),\, v_{\pi}(s_2), \dots, v_{\pi}(s_{|\mathcal{S}|})\)</span>, because each equation can be rearranged to something like:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s_i)
+   \;-\;
+   \gamma
+   \sum_{a,\,s_j}
+   \Bigl[
+   \text{(coefficient)} \times v_{\pi}(s_j)
+   \Bigr]
+   \;=\;
+   \sum_{a,\,s_j}
+   \Bigl[
+   \text{(coefficient)} \times R(s_i,a,s_j)
+   \Bigr].
+\]</div>
+<p>All terms involving <span class="math notranslate nohighlight">\(v_{\pi}(s_i)\)</span> or <span class="math notranslate nohighlight">\(v_{\pi}(s_j)\)</span> are multiplied by constant coefficients (which come from <span class="math notranslate nohighlight">\(\pi(a\mid s_i)\)</span>, <span class="math notranslate nohighlight">\(P(s_j\mid s_i,a)\)</span>, and <span class="math notranslate nohighlight">\(\gamma\)</span>).</p>
+<ol class="arabic simple" start="4">
+<li><p>Matrix Notation<br />
+In matrix form, one can write:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{v}_{\pi}
+   \;=\;
+   \mathbf{r}_{\pi} 
+   \;+\;
+   \gamma \,\mathbf{P}_{\pi}\,\mathbf{v}_{\pi},
+\]</div>
+<p>where:<br />
+• <span class="math notranslate nohighlight">\(\mathbf{v}_{\pi}\)</span> is a column vector <span class="math notranslate nohighlight">\(\bigl(v_{\pi}(s_1), v_{\pi}(s_2), \ldots, v_{\pi}(s_{|\mathcal{S}|})\bigr)^\top\)</span>.<br />
+• <span class="math notranslate nohighlight">\(\mathbf{r}_{\pi}\)</span> is the vector of expected immediate rewards in each state (depending on <span class="math notranslate nohighlight">\(\pi\)</span>).<br />
+• <span class="math notranslate nohighlight">\(\mathbf{P}_{\pi}\)</span> is the state transition probability matrix when actions are chosen according to <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>Rearranging:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{v}_{\pi} 
+   \;-\;
+   \gamma\,\mathbf{P}_{\pi}\,\mathbf{v}_{\pi}
+   \;=\;
+   \mathbf{r}_{\pi},
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+(\mathbf{I} - \gamma\,\mathbf{P}_{\pi})\,\mathbf{v}_{\pi}
+   \;=\;
+   \mathbf{r}_{\pi}.
+\]</div>
+<p>This is a linear system of dimension <span class="math notranslate nohighlight">\(|\mathcal{S}|\times|\mathcal{S}|\)</span>.</p>
+<ol class="arabic simple" start="5">
+<li><p>Conclusion<br />
+Therefore, for each state in a finite MDP, the Bellman equation contributes one linear equation in the unknown <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>. Putting them all together yields a system of <span class="math notranslate nohighlight">\(|\mathcal{S}|\)</span> linear equations. Solving this system (when <span class="math notranslate nohighlight">\(\gamma&lt;1\)</span> and <span class="math notranslate nohighlight">\(\mathbf{I} - \gamma\,\mathbf{P}_{\pi}\)</span> is invertible) yields the value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> for all states simultaneously.</p></li>
+</ol>
+<p>Indeed, your observation is correct: in a finite state space, the Bellman equation is precisely a system of linear equations in the variables <span class="math notranslate nohighlight">\(\{\,v_{\pi}(s): s\in \mathcal{S}\}\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="comapring-policies">
+<h1>Comapring Policies<a class="headerlink" href="#comapring-policies" title="Link to this heading"></a></h1>
+<p>Suppose you have two policies <span class="math notranslate nohighlight">\(\pi_1\)</span> and <span class="math notranslate nohighlight">\(\pi_2\)</span>. And also suppose that the Bellman equation is solved so that we get <span class="math notranslate nohighlight">\(v_{\pi_1}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi_2}\)</span>.  How is this used to evaluate and compare the two policies?</p>
+<p><strong>Answer</strong></p>
+<p>Below is a step-by-step explanation of how having the solved value functions <span class="math notranslate nohighlight">\(v_{\pi_1}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi_2}\)</span> (from two different policies <span class="math notranslate nohighlight">\(\pi_1\)</span> and <span class="math notranslate nohighlight">\(\pi_2\)</span>) enables one to compare and evaluate those policies:</p>
+<p>────────────────────────────────────────────────────────────────────────</p>
+<ol class="arabic simple">
+<li><p>The Meaning of v₍π₎(s)
+────────────────────────────────────────────────────────────────────────</p></li>
+</ol>
+<p>• For a given policy <span class="math notranslate nohighlight">\(\pi\)</span> in a Markov Decision Process (MDP), the value function</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+  \;=\;
+  \mathbb{E}\!\Bigl[G_t \,\Big\vert\, S_t = s\Bigr]
+\]</div>
+<p>tells us the expected return (cumulative discounted reward) starting from state <span class="math notranslate nohighlight">\(s\)</span> and following <span class="math notranslate nohighlight">\(\pi\)</span> thereafter.<br />
+• Thus, <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> captures how “good” it is to be in state <span class="math notranslate nohighlight">\(s\)</span> when one plans to follow <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────
+2) Comparing Two Policies State by State
+────────────────────────────────────────────────────────────────────────</p>
+<p>• Once you have computed <span class="math notranslate nohighlight">\(v_{\pi_1}(s)\)</span> and <span class="math notranslate nohighlight">\(v_{\pi_2}(s)\)</span> for all <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>, you can compare the policies pointwise by looking at each state <span class="math notranslate nohighlight">\(s\)</span>:<br />
+– If <span class="math notranslate nohighlight">\(v_{\pi_1}(s) &gt; v_{\pi_2}(s)\)</span>, then <span class="math notranslate nohighlight">\(\pi_1\)</span> yields a higher expected return than <span class="math notranslate nohighlight">\(\pi_2\)</span> specifically from state <span class="math notranslate nohighlight">\(s\)</span>.<br />
+– If <span class="math notranslate nohighlight">\(v_{\pi_2}(s)\)</span> exceeds <span class="math notranslate nohighlight">\(v_{\pi_1}(s)\)</span>, then <span class="math notranslate nohighlight">\(\pi_2\)</span> is better from that state.<br />
+• A strict ordering of the policies for all states might not hold (one can find states where <span class="math notranslate nohighlight">\(\pi_1\)</span> is better and others where <span class="math notranslate nohighlight">\(\pi_2\)</span> is better). That said, if</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi_1}(s)\;\ge\;v_{\pi_2}(s)
+  \quad\text{for all }s,
+\]</div>
+<p>then we can unambiguously say <span class="math notranslate nohighlight">\(\pi_1\)</span> is at least as good as <span class="math notranslate nohighlight">\(\pi_2\)</span> in every state.</p>
+<p>────────────────────────────────────────────────────────────────────────
+3) Comparing Two Policies from an Initial State or Distribution
+────────────────────────────────────────────────────────────────────────</p>
+<p>• In many RL problems, there is a designated initial state <span class="math notranslate nohighlight">\(s_0\)</span> or an initial state distribution <span class="math notranslate nohighlight">\(\mu_0\)</span>. In that scenario, one often compares the policies by looking at</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi_1}(s_0)
+  \quad\text{versus}\quad
+  v_{\pi_2}(s_0),
+\]</div>
+<p>or by evaluating the expected return under <span class="math notranslate nohighlight">\(\mu_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{s\in \mathcal{S}} 
+  \mu_0(s)\,
+  v_{\pi_1}(s)
+  \quad\text{versus}\quad
+  \sum_{s\in \mathcal{S}} 
+  \mu_0(s)\,
+  v_{\pi_2}(s).
+\]</div>
+<p>• The policy that yields a higher overall expected return from the start (or on average w.r.t. <span class="math notranslate nohighlight">\(\mu_0\)</span>) is deemed better.</p>
+<p>────────────────────────────────────────────────────────────────────────
+4) Practical Significance
+────────────────────────────────────────────────────────────────────────</p>
+<p>• If you have solved the Bellman equation for both policies (i.e., found <span class="math notranslate nohighlight">\(v_{\pi_1}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi_2}\)</span>), then you have a quantitative measure of performance for each state in <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.<br />
+• You can use this information to decide which policy performs better in specific states, or from the viewpoint of a particular start state.<br />
+• Often, this comparison step is part of Policy Iteration or other methods: one checks if an updated policy is better (in terms of the value function) than a previous one—if it is, one replaces the old policy.</p>
+<p>────────────────────────────────────────────────────────────────────────
+5) Conclusion
+────────────────────────────────────────────────────────────────────────</p>
+<p>Yes, once you solve the Bellman equations to get <span class="math notranslate nohighlight">\(v_{\pi_1}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi_2}\)</span>, you can evaluate and compare <span class="math notranslate nohighlight">\(\pi_1\)</span> and <span class="math notranslate nohighlight">\(\pi_2\)</span> by:</p>
+<ol class="arabic simple">
+<li><p>Checking their value functions state by state, if desired.</p></li>
+<li><p>Checking the expected return from a specific start state or an initial state distribution.</p></li>
+</ol>
+<p>The policy with the larger expected return (from the relevant initial condition) is considered better. If one policy has a higher value function in all states, it strictly dominates the other policy.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="return-value">
+<h1>Return value<a class="headerlink" href="#return-value" title="Link to this heading"></a></h1>
+<p>Below is a re-presentation of the concept of the action-value function, also known as the “Q-value” function, denoted by <span class="math notranslate nohighlight">\(q_{\pi}\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Motivation for <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span><br />
+• We already know that for a given policy <span class="math notranslate nohighlight">\(\pi\)</span>, the state-value function is:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s) \;=\; \mathbb{E}\bigl[G_t \;\big\vert\; S_t = s\bigr].
+\]</div>
+<p>• However, this quantity does not distinguish which action is taken in state <span class="math notranslate nohighlight">\(s\)</span>; it only assumes that actions will be chosen according to <span class="math notranslate nohighlight">\(\pi\)</span>.<br />
+• If we want to evaluate taking a specific action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>, we introduce the action-value function.</p>
+<ol class="arabic simple" start="2">
+<li><p>Definition of the Action-Value<br />
+• The action-value function <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> is defined as:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a) \;=\; \mathbb{E}\bigl[G_t \;\big\vert\; S_t = s,\; A_t = a,\; \pi\bigr].
+\]</div>
+<p>• This is the expected return obtained when:<br />
+1. We start in state <span class="math notranslate nohighlight">\(s\)</span>.<br />
+2. We immediately take action <span class="math notranslate nohighlight">\(a\)</span>.<br />
+3. Thereafter, we continue following policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<ol class="arabic simple" start="3">
+<li><p>Relationship to <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span><br />
+• From the definition above, after we take action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>, we end up in some next state <span class="math notranslate nohighlight">\(s'\)</span> and keep following <span class="math notranslate nohighlight">\(\pi\)</span>.<br />
+• If <span class="math notranslate nohighlight">\(\pi\)</span> is stochastic, then</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s) 
+     \;=\; 
+     \sum_{a \in \mathcal{A}} \pi(a \mid s)\; q_{\pi}(s,a).
+\]</div>
+<p>• Intuitively, <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is the average of <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> over all possible actions <span class="math notranslate nohighlight">\(a\)</span>, weighted by <span class="math notranslate nohighlight">\(\pi(a \mid s)\)</span>.</p>
+<ol class="arabic simple" start="4">
+<li><p>Bellman Equation for <span class="math notranslate nohighlight">\(q_{\pi}\)</span><br />
+• The Bellman expectation equation for <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> can be written as:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+     \;=\; 
+     \mathbb{E}\Bigl[
+       R_{t+1} \;+\; \gamma \, v_{\pi}(S_{t+1})
+       \;\Big\vert\;
+       S_t = s,\; A_t = a
+     \Bigr].
+\]</div>
+<p>• Equivalently, since</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(S_{t+1})
+     \;=\;
+     \sum_{a'} \pi(a' \mid S_{t+1})\,q_{\pi}(S_{t+1},\,a'),
+\]</div>
+<p>we can expand the right-hand side to express <span class="math notranslate nohighlight">\(q_{\pi}\)</span> entirely in terms of immediate rewards and future <span class="math notranslate nohighlight">\(q_{\pi}\)</span>-values.</p>
+<ol class="arabic simple" start="5">
+<li><p>Why <span class="math notranslate nohighlight">\(q_{\pi}\)</span> Matters<br />
+• Many RL algorithms, such as Q-learning and SARSA, center around learning an approximation of <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span>.<br />
+• Once <span class="math notranslate nohighlight">\(q_{\pi}\)</span> is known (or estimated), choosing actions becomes straightforward: one can compare the values of different actions in the same state to see which leads to the greatest expected return.</p></li>
+<li><p>Summary<br />
+• The state-value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> follows a policy everywhere.<br />
+• The action-value function <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> is a finer-grained measure that tells us the expected return if we pick a specific action <span class="math notranslate nohighlight">\(a\)</span> now, then continue with <span class="math notranslate nohighlight">\(\pi\)</span>.<br />
+• Both functions are crucial to understanding and devising strategies in Reinforcement Learning.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bellman-equations-for-q-pi-and-v-pi">
+<h1>Bellman Equations for <span class="math notranslate nohighlight">\(q_{\pi}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi}\)</span><a class="headerlink" href="#bellman-equations-for-q-pi-and-v-pi" title="Link to this heading"></a></h1>
+<p><em><strong>The step 4 above on the Bellman equation for <span class="math notranslate nohighlight">\(q_{\pi}\)</span>. Derive this with details and show the connection to the Bellman equation for <span class="math notranslate nohighlight">\(v_{\pi}\)</span>.</strong></em></p>
+<p><em><strong>Answer</strong></em></p>
+<p>Below is a detailed derivation of the Bellman equation for the action-value function, denoted by <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span>,
+showing its relationship to the Bellman equation for the state-value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────</p>
+<ol class="arabic simple">
+<li><p>Recall the Definitions
+────────────────────────────────────────────────────────────────────────────</p></li>
+</ol>
+<p>• State-Value Function (under policy <span class="math notranslate nohighlight">\(\pi\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+  \;=\;
+  \mathbb{E}\bigl[G_t 
+    \;\big\vert\;
+    S_t = s
+  \bigr],
+\]</div>
+<p>which is the expected return when starting in state <span class="math notranslate nohighlight">\(s\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and thereafter following <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>• Action-Value Function (under policy <span class="math notranslate nohighlight">\(\pi\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+  \;=\;
+  \mathbb{E}\bigl[G_t
+    \;\big\vert\;
+    S_t = s,\;
+    A_t = a,\;
+    \pi
+  \bigr],
+\]</div>
+<p>which is the expected return when starting in state <span class="math notranslate nohighlight">\(s\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, taking action <span class="math notranslate nohighlight">\(a\)</span> immediately, and then following <span class="math notranslate nohighlight">\(\pi\)</span> thereafter.</p>
+<p>• Return <span class="math notranslate nohighlight">\(G_t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+G_t
+  \;=\;
+  R_{t+1} \;+\;\gamma R_{t+2} \;+\;\gamma^2 R_{t+3} \;+\;\dots
+  \;=\;
+  \sum_{k=0}^{\infty}
+  \gamma^k \, R_{t+k+1}.
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(0 \le \gamma \le 1\)</span> is the discount factor.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+2) One-Step Decomposition of the Return
+────────────────────────────────────────────────────────────────────────────</p>
+<p>We start with the relation</p>
+<div class="math notranslate nohighlight">
+\[
+G_t
+\;=\;
+R_{t+1} \;+\; \gamma\,G_{t+1}.
+\]</div>
+<p>Taking the conditional expectation on both sides given <span class="math notranslate nohighlight">\(\bigl(S_t = s,\; A_t = a,\; \pi\bigr)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\mathbb{E}\bigl[
+  G_t
+  \;\big\vert\;
+  S_t = s,\;
+  A_t = a,\;
+  \pi
+\bigr]
+\;=\;
+\mathbb{E}\Bigl[
+  R_{t+1} \;+\; \gamma\,G_{t+1}
+  \;\Big\vert\;
+  S_t = s,\;
+  A_t = a,\;
+  \pi
+\Bigr].
+\]</div>
+<p>────────────────────────────────────────────────────────────────────────────
+3) Separate Immediate Reward and Future Return
+────────────────────────────────────────────────────────────────────────────</p>
+<p>We can split the expectation:</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\underbrace{
+  \mathbb{E}\bigl[
+    R_{t+1}
+    \,\big\vert\,
+    S_t = s,\;
+    A_t = a,\;
+    \pi
+  \bigr]
+}_{\text{expected immediate reward}}
+\;+\;
+\gamma
+\underbrace{
+  \mathbb{E}\bigl[
+    G_{t+1}
+    \,\big\vert\,
+    S_t = s,\;
+    A_t = a,\;
+    \pi
+  \bigr]
+}_{\text{expected future discounted return}}
+.
+\]</div>
+<ol class="arabic simple">
+<li><p>The term <span class="math notranslate nohighlight">\(\mathbb{E}[\,R_{t+1}\,\vert\, s,a,\pi]\)</span> is the expected reward for taking action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\mathbb{E}[\,G_{t+1}\,\vert\, s,a,\pi]\)</span> signals that once we have taken action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>, we transition to some state <span class="math notranslate nohighlight">\(s'\)</span>, and from <span class="math notranslate nohighlight">\(t+1\)</span> onward we follow policy <span class="math notranslate nohighlight">\(\pi\)</span>. The expected future return from <span class="math notranslate nohighlight">\(s'\)</span> under <span class="math notranslate nohighlight">\(\pi\)</span> is <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span>.</p></li>
+</ol>
+<p>────────────────────────────────────────────────────────────────────────────
+4) Transition to the Next State
+────────────────────────────────────────────────────────────────────────────</p>
+<p>The environment’s transition function <span class="math notranslate nohighlight">\(P(s' \mid s,a)\)</span> gives the probability of ending up in state <span class="math notranslate nohighlight">\(s'\)</span> after taking action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>. Hence,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}\bigl[
+  R_{t+1}
+  \;\big\vert\;
+  S_t = s,\;
+  A_t = a
+\bigr]
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \;\vert\; s,a)\,\;R(s,a,s'),
+\]</div>
+<p>assuming <span class="math notranslate nohighlight">\(R(s,a,s')\)</span> is the associated immediate reward for the transition <span class="math notranslate nohighlight">\((s,a)\to s'\)</span>.<br />
+Similarly,</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}\bigl[
+  G_{t+1}
+  \;\big\vert\;
+  S_t = s,\;
+  A_t = a,\;
+  \pi
+\bigr]
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \;\vert\; s,a)
+\,\underbrace{
+  \mathbb{E}[\,G_{t+1}\,\vert\,S_{t+1} = s',\,\pi]
+}_{v_{\pi}(s')}
+,
+\]</div>
+<p>since once we arrive in <span class="math notranslate nohighlight">\(s'\)</span>, we follow <span class="math notranslate nohighlight">\(\pi\)</span> and the expected return is <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+5) The Bellman Equation for <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span>
+────────────────────────────────────────────────────────────────────────────</p>
+<p>Putting these pieces together:</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \,\vert\, s,a)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma \, v_{\pi}(s')
+\Bigr].
+\]</div>
+<p>This is the Bellman expectation equation for <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span>. It shows that the action-value under <span class="math notranslate nohighlight">\(\pi\)</span> is the expected immediate reward plus the discounted value of the next state, averaged over all possible next states <span class="math notranslate nohighlight">\(s'\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+6) Connection to the Bellman Equation for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>
+────────────────────────────────────────────────────────────────────────────</p>
+<p>The state-value function <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> can be expressed in terms of <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+\;=\;
+\sum_{a \,\in\, \mathcal{A}}
+\pi(a \,\vert\, s)\;q_{\pi}(s,a).
+\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span> is the expectation of <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> over the policy <span class="math notranslate nohighlight">\(\pi(a \mid s)\)</span>. Conversely, when we write <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> in its Bellman form, we use <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span> to handle the future return once the agent transitions to the next state <span class="math notranslate nohighlight">\(s'\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \,\vert\, s,a)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma \,\underbrace{
+    \sum_{a' \,\in\, \mathcal{A}}
+    \pi(a' \,\vert\, s')\,q_{\pi}(s',a')
+  }_{v_{\pi}(s')}
+\Bigr].
+\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(q_{\pi}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi}\)</span> are tied together through these two Bellman equations.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+7) Summary
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• We started from the relation <span class="math notranslate nohighlight">\(G_t = R_{t+1} + \gamma G_{t+1}\)</span>, conditioning on <span class="math notranslate nohighlight">\(\{S_t = s, A_t = a\}\)</span> and policy <span class="math notranslate nohighlight">\(\pi\)</span>.<br />
+• We split the expectation into the immediate reward plus the discounted future return.<br />
+• By summing over next states <span class="math notranslate nohighlight">\(s'\)</span> and using the definition of <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span>, we arrived at</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \,\vert\, s,a)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma\,v_{\pi}(s')
+\Bigr].
+\]</div>
+<p>• Since <span class="math notranslate nohighlight">\(v_{\pi}(s') = \sum_{a'} \pi(a' \mid s')\,q_{\pi}(s',a')\)</span>, we see the close relationship between these two value functions. This completes the derivation of the Bellman equation for the action-value function <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> and clarifies its connection to the Bellman equation for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to My Test Book" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="chapter2.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Ess Ess.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

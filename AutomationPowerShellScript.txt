@@ -1,0 +1,15 @@
+This powershell script automates the build process. "update-docs.ps1"
+
+To use this script:
+
+Save it in your Sphinx project root directory (same level as make.bat)
+Run it by specifying the markdown file to process. Run this in the same level as make.bat
+
+.\update-docs.ps1 -MarkdownFile "chapter1.md"
+
+The script will:
+
+Process LaTeX in your markdown file
+Replace the original file with the processed version
+Clean up the build directory
+Generate fresh documentation

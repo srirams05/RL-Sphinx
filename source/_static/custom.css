@@ -1,0 +1,12 @@
+/* Base font settings for math content */
+.math {
+    font-family: "Times New Roman", Times, serif !important;
+}
+
+/* Base font settings for regular text */
+body,
+.rst-content,
+.wy-nav-content {
+    font-family: "Times New Roman", Times, serif !important;
+}
+
