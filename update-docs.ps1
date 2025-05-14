@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory=$true)]
-    [string]$MarkdownFile
+    [string]$MarkdownFile,
+    [Parameter(Mandatory=$false)]
+    [string]$CommitMessage = "Update documentation"
 )
 
 # Ensure we're in the right directory
@@ -38,4 +40,28 @@ if (Test-Path "build") {
 Write-Host "Building new documentation..."
 .\make.bat html
 
-Write-Host "Documentation update complete!"
+# Create .nojekyll file to prevent GitHub Pages from ignoring _static
+if (-not (Test-Path "docs\.nojekyll")) {
+    New-Item -Path "docs\.nojekyll" -ItemType File -Force
+}
+
+# Copy build/html contents to docs directory for GitHub Pages
+Write-Host "Updating docs directory..."
+if (-not (Test-Path "docs")) {
+    New-Item -ItemType Directory -Path "docs"
+}
+Copy-Item -Path "build/html/*" -Destination "docs" -Recurse -Force
+
+# Git operations
+Write-Host "Performing Git operations..."
+# Stage changes
+git add "source/$MarkdownFile"
+git add docs/
+
+# Commit changes
+git commit -m "$CommitMessage"
+
+# Push to GitHub
+git push origin main
+
+Write-Host "Documentation update and Git push complete!"

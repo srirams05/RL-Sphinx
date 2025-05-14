@@ -44,6 +44,11 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 
+# Add these lines for GitHub Pages
+html_baseurl = '/RL-Sphinx/'  # Replace with your repository name
+html_use_index = True
+html_copy_source = False
+
 
 myst_enable_extensions = [
     "dollarmath",
