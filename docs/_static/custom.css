@@ -14,7 +14,7 @@
 /* iPad and tablets (portrait and landscape) */
 @media screen and (max-width: 1024px) {
     .wy-nav-content {
-        max-width:85% !important;
+        max-width:80% !important;
         padding: 1.618em 3% !important;
     }
 }
