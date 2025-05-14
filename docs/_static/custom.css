@@ -1,20 +1,20 @@
 
 /* Main content width for desktop */
 .wy-nav-content {
-    max-width: 1200px !important;
+    max-width: 1100px !important;
 }
 
 /* Large desktop screens */
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1300px) {
     .wy-nav-content {
-        max-width: 1400px !important;
+        max-width: 1300px !important;
     }
 }
 
 /* iPad and tablets (portrait and landscape) */
 @media screen and (max-width: 1024px) {
     .wy-nav-content {
-        max-width: 90% !important;
+        max-width:85% !important;
         padding: 1.618em 3% !important;
     }
 }
@@ -22,7 +22,7 @@
 /* Smaller tablets and large phones */
 @media screen and (max-width: 768px) {
     .wy-nav-content {
-        max-width: 100% !important;
+        max-width: 90% !important;
         padding: 1em 2% !important;
     }
 }
