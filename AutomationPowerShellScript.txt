@@ -1,15 +1,24 @@
-This powershell script automates the build process. "update-docs.ps1"
+Yes, that's correct! Here's a summary of the workflow:
 
-To use this script:
+When you make changes to any markdown file (e.g., chapter2.md), run:
 
-Save it in your Sphinx project root directory (same level as make.bat)
-Run it by specifying the markdown file to process. Run this in the same level as make.bat
+.\update-docs.ps1 -MarkdownFile "chapter2.md" -CommitMessage "Updated chapter 2 content"
 
-.\update-docs.ps1 -MarkdownFile "chapter1.md"
+
 
 The script will:
 
-Process LaTeX in your markdown file
-Replace the original file with the processed version
-Clean up the build directory
-Generate fresh documentation
+Process LaTeX delimiters in your markdown
+Rebuild Sphinx documentation
+Copy the built files to docs directory
+Commit and push changes to GitHub
+Then:
+
+Wait a few minutes for GitHub Pages to rebuild (usually 1-2 minutes)
+Access your documentation at https://srirams05.github.io/RL-Sphinx/
+Note:
+
+You can provide any meaningful commit message
+If you omit -CommitMessage, it defaults to "Update documentation"
+GitHub Pages deployment status can be checked in your repository's "Actions" tab
+So the entire process is automated with just one command!
