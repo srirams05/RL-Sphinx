@@ -1499,8 +1499,7 @@ q_*(s,a)
 $$
 
 
-where \( q_{\pi}(s,a) = \mathbb{E}\!\bigl[G_t \,\vert\,S_t = s,\;A_t = a,\;\pi\bigr].
-\)
+where $q_{\pi}(s,a) = \mathbb{E}\!\bigl[G_t \,\vert\,S_t = s,\;A_t = a,\;\pi\bigr]$
 
 The notation “$\max_{\pi}$” means we take the supremum (maximum) over all possible policies $\pi$. Under standard conditions (e.g., finite state space, bounded rewards, or $\gamma<1$), these maxima exist and define $v_*$ and $q_*$.
 
