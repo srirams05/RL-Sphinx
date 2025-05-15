@@ -13,6 +13,15 @@
     }
 }
 
+/* iPad Pro */
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+    .wy-nav-content {
+        max-width: 70% !important;
+        padding: 1.618em 3% !important;
+        font-size: 18px;
+    }
+}
+
 /* iPad and tablets (portrait and landscape) */
 @media screen and (max-width: 1024px) {
     .wy-nav-content {
@@ -20,7 +29,8 @@
         padding: 1.618em 3% !important;
         font-size: 18px;
     }
-}
+} 
+
 
 /* Smaller tablets and large phones */
 @media screen and (max-width: 768px) {
