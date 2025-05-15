@@ -60,6 +60,8 @@
 <li class="toctree-l1"><a class="reference internal" href="#comapring-policies">Comapring Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#return-value">Return value</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#bellman-equations-for-q-pi-and-v-pi">Bellman Equations for <span class="math notranslate nohighlight">\(q_{\pi}\)</span> and <span class="math notranslate nohighlight">\(v_{\pi}\)</span></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#optimal-policy">Optimal Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#bellman-optimality-equation">Bellman Optimality Equation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter2.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter2.html#basic-math-examples">Basic Math Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter2.html#code-snippet">Code Snippet</a></li>
@@ -1222,6 +1224,337 @@ P(s' \,\vert\, s,a)
 \Bigr].
 \]</div>
 <p>• Since <span class="math notranslate nohighlight">\(v_{\pi}(s') = \sum_{a'} \pi(a' \mid s')\,q_{\pi}(s',a')\)</span>, we see the close relationship between these two value functions. This completes the derivation of the Bellman equation for the action-value function <span class="math notranslate nohighlight">\(q_{\pi}(s,a)\)</span> and clarifies its connection to the Bellman equation for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="optimal-policy">
+<h1>Optimal Policy<a class="headerlink" href="#optimal-policy" title="Link to this heading"></a></h1>
+<p><em><strong>Now that we have the concepts of the state value <span class="math notranslate nohighlight">\(v_{\pi}\)</span> and the return value <span class="math notranslate nohighlight">\(q_{\pi}\)</span> for a given policy <span class="math notranslate nohighlight">\(\pi\)</span>, and the associated Bellman equations, there is the concept of the optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span>. There is an associated concept of the Bellman Optimality Equation. Explain these concepts.</strong></em></p>
+<p><em><strong>Answer</strong></em></p>
+<p>Below is a step-by-step explanation of the concept of an optimal policy in Reinforcement Learning, and how it leads to the Bellman Optimality Equations.</p>
+<p>─────────────────────────────────────────────────────────────────────────</p>
+<ol class="arabic simple">
+<li><p>Policy and Value Functions</p></li>
+</ol>
+<p>──────────────────────────────────────────────────────────────────────</p>
+<p>• A policy <span class="math notranslate nohighlight">\(\pi\)</span> is any mapping from states to action probabilities (or actions, if deterministic).<br />
+• The state-value function for a given policy <span class="math notranslate nohighlight">\(\pi\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+\;=\;
+\mathbb{E}\bigl[G_t \;\big\vert\; S_t = s,\;\pi \bigr],
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(G_t\)</span> is the return from time <span class="math notranslate nohighlight">\(t\)</span> onward.<br />
+• The action-value function for <span class="math notranslate nohighlight">\(\pi\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\mathbb{E}\bigl[G_t \;\big\vert\; S_t = s,\; A_t = a,\;\pi \bigr].
+\]</div>
+<p>These value functions describe how “good” it is to be in a particular state <span class="math notranslate nohighlight">\(s\)</span>—or to take a particular action <span class="math notranslate nohighlight">\(a\)</span> in <span class="math notranslate nohighlight">\(s\)</span>—under the policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+2) Optimal Policy <span class="math notranslate nohighlight">\(\pi^*\)</span>
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• The goal in Reinforcement Learning is often to find a policy <span class="math notranslate nohighlight">\(\pi^*\)</span> that maximizes the expected return from every state.<br />
+• Formally, <span class="math notranslate nohighlight">\(\pi^*\)</span> is said to be optimal if, for all states <span class="math notranslate nohighlight">\(s\in \mathcal{S}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi^*}(s)
+\;=\;
+\max_{\pi} \;
+v_{\pi}(s).
+\]</div>
+<p>Equivalently, <span class="math notranslate nohighlight">\(\pi^*\)</span> achieves or exceeds the performance of every other policy <span class="math notranslate nohighlight">\(\pi\)</span>.<br />
+• There can be multiple optimal policies, but they share the same value functions, denoted <span class="math notranslate nohighlight">\(v_*\)</span> and <span class="math notranslate nohighlight">\(q_*\)</span>, defined below.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+3) Optimal Value Functions
+────────────────────────────────────────────────────────────────────────────</p>
+<p>We define</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s)
+\;=\;
+\max_{\pi} \;v_{\pi}(s),
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+q_*(s,a)
+\;=\;
+\max_{\pi} \;q_{\pi}(s,a).
+\]</div>
+<p>• Thus, <span class="math notranslate nohighlight">\(v_*(s)\)</span> is the maximum possible expected return achievable from state <span class="math notranslate nohighlight">\(s\)</span>, over all policies.<br />
+• Similarly, <span class="math notranslate nohighlight">\(q_*(s,a)\)</span> is the maximum possible expected return when starting from <span class="math notranslate nohighlight">\(s\)</span>, taking action <span class="math notranslate nohighlight">\(a\)</span>, and thereafter following the best possible policy.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+4) Bellman Optimality Equations
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• Just as there are Bellman equations for <span class="math notranslate nohighlight">\(v_{\pi}\)</span> and <span class="math notranslate nohighlight">\(q_{\pi}\)</span> under a fixed policy <span class="math notranslate nohighlight">\(\pi\)</span>, there are corresponding Bellman Optimality Equations for <span class="math notranslate nohighlight">\(v_*\)</span> and <span class="math notranslate nohighlight">\(q_*\)</span>.<br />
+• For the optimal state-value function <span class="math notranslate nohighlight">\(v_*(s)\)</span>, the Bellman Optimality Equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s)
+\;=\;
+\max_{a \,\in\,\mathcal{A}}
+\;\biggl[
+  \sum_{s' \,\in\,\mathcal{S}}
+  P(s' \mid s,a)\,
+  \Bigl(
+    R(s,a,s') \;+\;\gamma\,v_*(s')
+  \Bigr)
+\biggr].
+\]</div>
+<p>• In words: from state <span class="math notranslate nohighlight">\(s\)</span>, pick the action <span class="math notranslate nohighlight">\(a\)</span> that gives the highest expected immediate reward plus the discounted optimal value of the next state.</p>
+<p>• For the optimal action-value function <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>, the Bellman Optimality Equation is:</p>
+<div class="math notranslate nohighlight">
+\[
+q_*(s,a)
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \mid s,a)
+\Bigl[
+  R(s,a,s') \;+\;
+  \gamma \,\max_{a'\,\in\,\mathcal{A}} \,q_*(s',a')
+\Bigr].
+\]</div>
+<p>• Here, after taking action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span> to reach <span class="math notranslate nohighlight">\(s'\)</span>, we assume the agent chooses the (optimal) action <span class="math notranslate nohighlight">\(a' = \arg\max_{\,a'} q_*(s',a')\)</span> thereafter.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+5) Connection to the Concept of Optimality
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• If the agent somehow knows <span class="math notranslate nohighlight">\(q_*\)</span>, it can act optimally by choosing, in each state <span class="math notranslate nohighlight">\(s\)</span>, the action <span class="math notranslate nohighlight">\(a\)</span> that maximizes <span class="math notranslate nohighlight">\(q_*(s,a)\)</span>.<br />
+• Equivalently, if the agent knows <span class="math notranslate nohighlight">\(v_*\)</span> and the environment’s transition probabilities, then to select the optimal action from a state <span class="math notranslate nohighlight">\(s\)</span>, one can compute the action that attains the maximum in</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{a}\;\bigl[
+  \sum_{s'}
+    P(s' \mid s,a)\,
+    (\,R(s,a,s') + \gamma\,v_*(s')\,)
+\bigr].
+\]</div>
+<p>────────────────────────────────────────────────────────────────────────────
+6) Summary
+────────────────────────────────────────────────────────────────────────────</p>
+<ol class="arabic simple">
+<li><p>An optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> is one that achieves the highest possible value in every state (or equivalently, for every state-action pair).</p></li>
+<li><p>The optimal value functions <span class="math notranslate nohighlight">\(v_*\)</span> and <span class="math notranslate nohighlight">\(q_*\)</span> are defined as the supremum over all policies of <span class="math notranslate nohighlight">\(v_{\pi}\)</span> and <span class="math notranslate nohighlight">\(q_{\pi}\)</span>, respectively.</p></li>
+<li><p>They satisfy the Bellman Optimality Equations, which replace the explicit dependence on <span class="math notranslate nohighlight">\(\pi\)</span> with a maximization over actions.</p></li>
+<li><p>Solving these equations in principle yields <span class="math notranslate nohighlight">\(v_*\)</span> (or <span class="math notranslate nohighlight">\(q_*\)</span>) and hence identifies which actions are optimal in each state, leading to an optimal policy.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bellman-optimality-equation">
+<h1>Bellman Optimality Equation<a class="headerlink" href="#bellman-optimality-equation" title="Link to this heading"></a></h1>
+<p><em><strong>The selection of an optimal policy implies choosing the maximum or supremum over all policies. However, in step 4 describing the Bellman Optimality Equation, there does not seem to be an explicit selection across the set of policies. Perhaps, this is an outcome. If so, derive in detail, how the Bellman Optimality Equation follows from the notion of optimal value functions.</strong></em></p>
+<p><em><strong>Answer</strong></em></p>
+<p>Below is a detailed derivation showing how the notion of “maximizing over all policies” leads to the Bellman Optimality Equations, using LaTeX for all mathematical symbols and expressions.</p>
+<p>─────────────────────────────────────────────────────────────────────────</p>
+<ol class="arabic simple">
+<li><p>Optimal Value Functions</p></li>
+</ol>
+<p>──────────────────────────────────────────────────────────────────────</p>
+<p>We define the optimal state-value function and action-value function as follows:</p>
+<p>• Optimal state-value function:</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s) 
+\;=\; 
+\max_{\pi}\;v_{\pi}(s),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_{\pi}(s) = \mathbb{E}\!\bigl[G_t \,\vert\,S_t = s,\;\pi\bigr] \)</span></p>
+<p>• Optimal action-value function:</p>
+<div class="math notranslate nohighlight">
+\[
+q_*(s,a) 
+\;=\;
+\max_{\pi}\;q_{\pi}(s,a),
+\]</div>
+<p>where ( q_{\pi}(s,a) = \mathbb{E}!\bigl[G_t ,\vert,S_t = s,;A_t = a,;\pi\bigr].
+)</p>
+<p>The notation “<span class="math notranslate nohighlight">\(\max_{\pi}\)</span>” means we take the supremum (maximum) over all possible policies <span class="math notranslate nohighlight">\(\pi\)</span>. Under standard conditions (e.g., finite state space, bounded rewards, or <span class="math notranslate nohighlight">\(\gamma&lt;1\)</span>), these maxima exist and define <span class="math notranslate nohighlight">\(v_*\)</span> and <span class="math notranslate nohighlight">\(q_*\)</span>.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+2) Bellman Equation for a Given Policy <span class="math notranslate nohighlight">\(\pi\)</span>
+────────────────────────────────────────────────────────────────────────────</p>
+<p>For reference, recall that for any fixed policy <span class="math notranslate nohighlight">\(\pi\)</span>, the Bellman expectation equations are:</p>
+<p>• State-value:</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s)
+\;=\;
+\sum_{a \,\in\, \mathcal{A}}
+\pi(a \mid s)
+\sum_{s' \,\in\, \mathcal{S}}
+P\bigl(s' \mid s,a\bigr)\,
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma\,v_{\pi}(s')
+\Bigr].
+\]</div>
+<p>• Action-value:</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\sum_{s' \,\in\, \mathcal{S}}
+P\bigl(s' \mid s,a\bigr)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma \,v_{\pi}(s')
+\Bigr].
+\]</div>
+<p>These follow directly from the fact that <span class="math notranslate nohighlight">\(G_t = R_{t+1} + \gamma\,G_{t+1}\)</span> and taking expectations conditioned on <span class="math notranslate nohighlight">\((S_t=s, A_t=a)\)</span> or <span class="math notranslate nohighlight">\((S_t=s)\)</span> respectively.</p>
+<p>────────────────────────────────────────────────────────────────────────────
+3) Maximizing Over Policies for <span class="math notranslate nohighlight">\(v_*\)</span>
+────────────────────────────────────────────────────────────────────────────</p>
+<p>By definition,</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s)
+\;=\;
+\max_{\pi}\,v_{\pi}(s).
+\]</div>
+<p>Substitute the Bellman equation for <span class="math notranslate nohighlight">\(v_{\pi}(s)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s)
+\;=\;
+\max_{\pi}
+\sum_{a}
+\pi(a \mid s)
+\sum_{s'}
+P(s' \mid s,a)\,
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma\,v_{\pi}(s')
+\Bigr].
+\]</div>
+<p>Notice that for each fixed state <span class="math notranslate nohighlight">\(s\)</span>, a policy <span class="math notranslate nohighlight">\(\pi\)</span> chooses a distribution <span class="math notranslate nohighlight">\(\{\pi(a \mid s)\}\)</span> over actions <span class="math notranslate nohighlight">\(a\)</span>. But taking a probability-weighted sum of values cannot exceed simply picking the single best action. Formally,</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{\pi}\,
+\sum_{a}
+\pi(a \mid s)\,f(a)
+\;=\;
+\max_{a}\,f(a),
+\]</div>
+<p>for any function <span class="math notranslate nohighlight">\(f\)</span>. Let</p>
+<div class="math notranslate nohighlight">
+\[
+f(a)
+\;=\;
+\sum_{s'}
+P(s' \mid s,a)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma \,\underbrace{v_{\pi}(s')}_{\le v_*(s')}
+\Bigr].
+\]</div>
+<p>Because <span class="math notranslate nohighlight">\(v_{\pi}(s') \le v_*(s')\)</span> for all <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(s'\)</span>, the best we can do is to replace <span class="math notranslate nohighlight">\(v_{\pi}(s')\)</span> by <span class="math notranslate nohighlight">\(v_*(s')\)</span>. Thus,</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s)
+\;=\;
+\max_{a}
+\sum_{s'}
+P(s' \mid s,a)\,
+\bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma\,v_*(s')
+\bigr].
+\]</div>
+<p>This yields the Bellman Optimality Equation for <span class="math notranslate nohighlight">\(v_*(s)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{
+v_*(s)
+\;=\;
+\max_{a \,\in\, \mathcal{A}}\;
+\sum_{s' \,\in\, \mathcal{S}}
+P(s' \mid s,a)\;
+\bigl[
+  R(s,a,s')
+  \;+\;\gamma\,v_*(s')
+\bigr].
+}
+\]</div>
+<p>────────────────────────────────────────────────────────────────────────────
+4) Bellman Optimality Equation for <span class="math notranslate nohighlight">\(q_*\)</span>
+────────────────────────────────────────────────────────────────────────────</p>
+<p>Similarly, from</p>
+<div class="math notranslate nohighlight">
+\[
+q_{\pi}(s,a)
+\;=\;
+\sum_{s'}
+P(s' \mid s,a)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma\,v_{\pi}(s')
+\Bigr],
+\]</div>
+<p>we define</p>
+<div class="math notranslate nohighlight">
+\[
+q_*(s,a)
+\;=\;
+\max_{\pi}\;
+q_{\pi}(s,a).
+\]</div>
+<p>But we already have</p>
+<div class="math notranslate nohighlight">
+\[
+v_{\pi}(s')
+\;\le\;
+v_*(s'),
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+v_*(s')
+\;=\;
+\max_{a'}\;
+q_*(s',a').
+\]</div>
+<p>Hence, by substituting <span class="math notranslate nohighlight">\(v_*(s') = \max_{a'} q_*(s',a')\)</span>, we arrive at</p>
+<div class="math notranslate nohighlight">
+\[
+q_*(s,a)
+\;=\;
+\sum_{s'}
+P(s' \mid s,a)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma\;\max_{a'}\;q_*(s',a')
+\Bigr].
+\]</div>
+<p>This is the Bellman Optimality Equation for the action-value function:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{
+q_*(s,a)
+\;=\;
+\sum_{s'\,\in\,\mathcal{S}}
+P\bigl(s' \mid s,a\bigr)
+\Bigl[
+  R(s,a,s')
+  \;+\;
+  \gamma
+  \,\max_{a'\,\in\,\mathcal{A}}
+  q_*(s',a')
+\Bigr].
+}
+\]</div>
+<p>────────────────────────────────────────────────────────────────────────────
+5) Interpretation and Summary
+────────────────────────────────────────────────────────────────────────────</p>
+<p>• By defining <span class="math notranslate nohighlight">\(v_*\)</span> and <span class="math notranslate nohighlight">\(q_*\)</span> as the maximum over all policies of the corresponding value functions, we effectively pick the best possible action choices at each state.<br />
+• The Markov Decision Process structure means that “maximizing over policies” can be carried out state by state, leading to a pointwise maximization over actions in the Bellman Optimality Equations.<br />
+• Once one computes or approximates <span class="math notranslate nohighlight">\(q_*\)</span>, one obtains an optimal policy simply by greedily choosing the action that maximizes <span class="math notranslate nohighlight">\(q_*(s,a)\)</span> in each state <span class="math notranslate nohighlight">\(s\)</span>. Equivalently, from <span class="math notranslate nohighlight">\(v_*\)</span> and knowledge of the environment’s transitions and rewards, one can also identify the best actions.</p>
+<p>Thus, the Bellman Optimality Equations naturally arise from the desire to choose the best action in each state—an outcome of maximizing over all possible policies in an MDP.</p>
 </section>
 
 
